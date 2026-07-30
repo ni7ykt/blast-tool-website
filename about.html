@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ℹ️ 關於 - 炸麥工具</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { background: #000; font-family: 'Inter', 'Noto Sans TC', sans-serif; color: #eee; }
+        .about-card {
+            background: rgba(10, 10, 20, 0.7);
+            border: 1px solid rgba(255, 13, 13, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .about-card:hover {
+            border-color: #ff0d0d;
+            box-shadow: 0 0 40px rgba(255, 13, 13, 0.15);
+        }
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent 50%, rgba(255, 13, 13, 0.03) 50%);
+            background-size: 100% 6px;
+            pointer-events: none;
+            z-index: 999;
+            animation: scan 12s linear infinite;
+        }
+        @keyframes scan {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 1000px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="scanline"></div>
+
+<header class="fixed top-0 left-0 right-0 z-50 px-6 py-4 backdrop-blur-sm border-b border-white/5 bg-black/60">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <a href="index.html" class="text-xl font-bold tracking-tighter hover:text-red-500 transition">💀 炸麥工具</a>
+        <nav class="hidden md:flex gap-6 text-sm font-medium">
+            <a href="index.html" class="hover:text-red-500 transition">首頁</a>
+            <a href="features.html" class="hover:text-red-500 transition">功能</a>
+            <a href="download.html" class="hover:text-red-500 transition">下載</a>
+            <a href="about.html" class="text-red-500 transition">關於</a>
+        </nav>
+        <a href="download.html" class="border border-red-500 px-4 py-2 text-sm font-medium hover:bg-red-500 hover:text-black transition rounded-lg">下載軍火</a>
+    </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-5 pt-28 pb-20">
+
+    <div class="text-center mb-12">
+        <div class="text-red-500 font-mono text-sm mb-2">💀 關於我們</div>
+        <h1 class="text-5xl md:text-6xl font-bold" style="color:#ff0d0d;text-shadow:0 0 10px #ff4d4d;">聲卡毀滅者</h1>
+    </div>
+
+    <div class="about-card p-8 mb-6">
+        <h2 class="text-2xl font-bold text-red-400 mb-4">💀 什麼是炸麥工具？</h2>
+        <p class="text-gray-400 leading-relaxed">
+            炸麥工具是一款專為 Discord 語音頻道設計的即時音頻處理工具。透過多種毀滅性的音效組合，讓你的聲音在語音頻道中產生極具衝擊力的效果。
+        </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+        <div class="about-card p-8">
+            <h2 class="text-xl font-bold text-cyan-400 mb-3">🎯 目標</h2>
+            <p class="text-gray-400 text-sm leading-relaxed">用最直接的方式改變語音頻道的氛圍，讓每個人都感受到聲音的威力。</p>
+        </div>
+        <div class="about-card p-8">
+            <h2 class="text-xl font-bold text-purple-400 mb-3">⚡ 技術</h2>
+            <p class="text-gray-400 text-sm leading-relaxed">基於 PyAudio 和 NumPy 建構，實現極低延遲的即時音頻處理。</p>
+        </div>
+        <div class="about-card p-8">
+            <h2 class="text-xl font-bold text-yellow-400 mb-3">🔒 安全</h2>
+            <p class="text-gray-400 text-sm leading-relaxed">建議使用 VB-Cable 虛擬音效卡，保護你的真實音效裝置。</p>
+        </div>
+        <div class="about-card p-8">
+            <h2 class="text-xl font-bold text-green-400 mb-3">📦 免費</h2>
+            <p class="text-gray-400 text-sm leading-relaxed">完全免費使用，持續更新，加入 Discord 社群獲取最新版本。</p>
+        </div>
+    </div>
+
+    <div class="about-card p-8 mt-6 text-center">
+        <h2 class="text-xl font-bold text-red-400 mb-4">📢 免責聲明</h2>
+        <p class="text-gray-400 text-sm leading-relaxed">
+            本工具僅供娛樂用途。使用時請注意音量，避免損壞聽力或音響設備。<br>
+            使用本工具即表示你同意承擔所有風險。
+        </p>
+    </div>
+
+    <div class="text-center mt-8">
+        <a href="index.html" class="text-gray-500 hover:text-red-500 transition text-sm">← 返回首頁</a>
+    </div>
+
+</main>
+
+<footer class="text-center py-8 text-gray-500 text-sm border-t border-white/5">
+    💀 不用禁你麥，你會自己關 Discord<br>
+    © 2026 炸麥工具 — 聲卡毀滅者
+</footer>
+
+</body>
+</html>
