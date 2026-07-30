@@ -71,20 +71,21 @@
         <!-- 訊息顯示 -->
         <div id="message" class="hidden p-3 rounded-lg mb-4 text-sm"></div>
 
+        <!-- 註冊表單 -->
         <form id="registerForm" onsubmit="handleRegister(event)">
             <div class="mb-4">
                 <label class="block text-gray-300 text-sm mb-2">👤 帳號</label>
-                <input type="text" id="username" class="input-field" placeholder="請輸入帳號" required minlength="3">
+                <input type="text" id="username" class="input-field" placeholder="請輸入帳號 (3-20字)" required minlength="3" maxlength="20">
             </div>
 
             <div class="mb-4">
-                <label class="block text-gray-300 text-sm mb-2">📧 Email (選填)</label>
-                <input type="email" id="email" class="input-field" placeholder="請輸入 Email">
+                <label class="block text-gray-300 text-sm mb-2">📧 Email</label>
+                <input type="email" id="email" class="input-field" placeholder="example@gmail.com" required>
             </div>
 
             <div class="mb-4">
                 <label class="block text-gray-300 text-sm mb-2">🔒 密碼</label>
-                <input type="password" id="password" class="input-field" placeholder="請輸入密碼" required minlength="4">
+                <input type="password" id="password" class="input-field" placeholder="請輸入密碼 (最少4字)" required minlength="4">
             </div>
 
             <div class="mb-6">
@@ -118,7 +119,6 @@ function handleRegister(event) {
     
     const messageDiv = document.getElementById('message');
     
-    // 驗證
     if (password !== confirm) {
         showMessage('❌ 兩次密碼輸入不一致！', 'danger');
         return;
@@ -129,7 +129,6 @@ function handleRegister(event) {
         return;
     }
     
-    // 註冊
     const result = registerUser(username, password, email);
     
     if (result.success) {
