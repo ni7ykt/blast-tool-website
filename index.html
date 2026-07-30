@@ -100,6 +100,21 @@
             background: linear-gradient(90deg, transparent, #ff0d0d, transparent);
             margin: 3rem 0;
         }
+        .download-btn {
+            background: linear-gradient(135deg, #ff0d0d, #8b0000);
+            transition: all 0.2s;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.2rem;
+        }
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(255, 13, 13, 0.6);
+        }
     </style>
 </head>
 <body>
@@ -109,14 +124,17 @@
 <!-- Header -->
 <header class="fixed top-0 left-0 right-0 z-50 px-6 py-4 backdrop-blur-sm border-b border-white/5 bg-black/60">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
-        <div class="text-xl font-bold tracking-tighter">💀 炸麥工具</div>
+        <a href="index.html" class="text-xl font-bold tracking-tighter hover:text-red-500 transition">💀 炸麥工具</a>
         <nav class="hidden md:flex gap-6 text-sm font-medium">
-            <a href="index.html" class="hover:text-red-500 transition">首頁</a>
+            <a href="index.html" class="text-red-500 transition">首頁</a>
             <a href="features.html" class="hover:text-red-500 transition">功能</a>
             <a href="download.html" class="hover:text-red-500 transition">下載</a>
             <a href="about.html" class="hover:text-red-500 transition">關於</a>
         </nav>
-        <a href="download.html" class="border border-red-500 px-4 py-2 text-sm font-medium hover:bg-red-500 hover:text-black transition rounded-lg">下載軍火</a>
+        <!-- ===== 登入狀態區域 ===== -->
+        <div class="flex items-center gap-4" id="navAuth">
+            <!-- 由 JS 動態產生 -->
+        </div>
     </div>
 </header>
 
@@ -220,6 +238,29 @@
     </footer>
 
 </main>
+
+<!-- ============================================ -->
+<!-- ============ 登入狀態 JS ============ -->
+<!-- ============================================ -->
+<script src="js/auth.js"></script>
+<script>
+    // 更新導航欄
+    const user = getCurrentUser();
+    const navAuth = document.getElementById('navAuth');
+    
+    if (user) {
+        navAuth.innerHTML = `
+            <span class="text-cyan-400 text-sm">👤 ${user.username}</span>
+            <a href="dashboard.html" class="hover:text-red-500 transition text-sm">儀表板</a>
+            <a href="#" onclick="logoutUser()" class="text-red-400 hover:text-red-300 transition text-sm">登出</a>
+        `;
+    } else {
+        navAuth.innerHTML = `
+            <a href="login.html" class="border border-red-500 px-4 py-2 text-sm font-medium hover:bg-red-500 hover:text-black transition rounded-lg">登入</a>
+            <a href="register.html" class="bg-red-500 px-4 py-2 text-sm font-medium hover:bg-red-600 transition rounded-lg text-black">註冊</a>
+        `;
+    }
+</script>
 
 </body>
 </html>
