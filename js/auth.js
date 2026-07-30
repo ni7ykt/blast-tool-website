@@ -17,12 +17,17 @@ function saveUsers(users) {
 function registerUser(username, password, email = '') {
     const users = getUsers();
     
-    // 檢查帳號是否已存在
     if (users[username]) {
         return { success: false, message: '❌ 此帳號已被使用！' };
     }
     
-    // 儲存使用者
+    // 檢查信箱是否已被註冊
+    for (let key in users) {
+        if (users[key].email && users[key].email === email) {
+            return { success: false, message: '❌ 此信箱已被註冊！' };
+        }
+    }
+    
     users[username] = {
         password: password,
         email: email,
@@ -45,11 +50,10 @@ function loginUser(username, password) {
         return { success: false, message: '❌ 密碼錯誤！' };
     }
     
-    // 儲存登入狀態
     sessionStorage.setItem('blast_user', JSON.stringify({
         username: username,
-        email: users[username].email,
-        avatar: users[username].avatar
+        email: users[username].email || '',
+        avatar: users[username].avatar || 'https://i.pinimg.com/1200x/13/41/45/13414519583c03a8576b45d6171c11c9.jpg'
     }));
     
     return { success: true, message: '✅ 登入成功！' };
@@ -58,7 +62,7 @@ function loginUser(username, password) {
 // 登出
 function logoutUser() {
     sessionStorage.removeItem('blast_user');
-    window.location.href = 'index.html';
+    window.location.href = 'login.html';
 }
 
 // 檢查是否已登入
@@ -81,16 +85,79 @@ function requireAuth() {
     return true;
 }
 
-// 顯示使用者名稱（放在導航欄）
-function updateNavbar() {
-    const user = getCurrentUser();
-    const nav = document.querySelector('nav .flex.items-center.gap-4');
+// ===== 忘記密碼相關 =====
+
+function sendResetCode(email) {
+    const users = getUsers();
     
-    if (user && nav) {
-        nav.innerHTML = `
-            <span class="text-cyan-400 text-sm">👤 ${user.username}</span>
-            <a href="dashboard.html" class="hover:text-cyan-400 transition text-sm">儀表板</a>
-            <a href="#" onclick="logoutUser()" class="text-red-400 hover:text-red-300 transition text-sm">登出</a>
-        `;
+    let foundUser = null;
+    for (let key in users) {
+        if (users[key].email === email) {
+            foundUser = key;
+            break;
+        }
     }
+    
+    if (!foundUser) {
+        return { success: false, message: '❌ 此信箱未註冊！' };
+    }
+    
+    const code = String(Math.floor(100000 + Math.random() * 900000));
+    
+    const resetData = {
+        username: foundUser,
+        email: email,
+        code: code,
+        created_at: Date.now()
+    };
+    localStorage.setItem('reset_' + email, JSON.stringify(resetData));
+    
+    alert(`📧 驗證碼已寄送到 ${email}\n\n你的驗證碼是：${code}\n\n（實際會透過 Gmail 發送）`);
+    
+    return { success: true, message: '✅ 驗證碼已寄送！', code: code };
+}
+
+function verifyResetCode(email, code) {
+    const key = 'reset_' + email;
+    const data = localStorage.getItem(key);
+    
+    if (!data) {
+        return { success: false, message: '❌ 驗證碼已過期，請重新申請！' };
+    }
+    
+    const resetData = JSON.parse(data);
+    
+    if (Date.now() - resetData.created_at > 300000) {
+        localStorage.removeItem(key);
+        return { success: false, message: '❌ 驗證碼已過期，請重新申請！' };
+    }
+    
+    if (resetData.code !== code) {
+        return { success: false, message: '❌ 驗證碼錯誤！' };
+    }
+    
+    return { success: true, message: '✅ 驗證成功！', username: resetData.username };
+}
+
+function resetPassword(email, newPassword) {
+    const users = getUsers();
+    
+    let foundUser = null;
+    for (let key in users) {
+        if (users[key].email === email) {
+            foundUser = key;
+            break;
+        }
+    }
+    
+    if (!foundUser) {
+        return { success: false, message: '❌ 使用者不存在！' };
+    }
+    
+    users[foundUser].password = newPassword;
+    saveUsers(users);
+    
+    localStorage.removeItem('reset_' + email);
+    
+    return { success: true, message: '✅ 密碼重設成功！' };
 }
