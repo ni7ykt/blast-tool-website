@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 儀表板 - 炸麥工具</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/auth.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { background: #0a0a0a; font-family: 'Inter', 'Noto Sans TC', sans-serif; color: #eee; }
+        .glass {
+            background: rgba(10, 10, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 13, 13, 0.2);
+            border-radius: 1.5rem;
+        }
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent 50%, rgba(255, 13, 13, 0.03) 50%);
+            background-size: 100% 6px;
+            pointer-events: none;
+            z-index: 999;
+            animation: scan 12s linear infinite;
+        }
+        @keyframes scan {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 1000px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="scanline"></div>
+
+<!-- 導航 -->
+<nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4 backdrop-blur-sm border-b border-white/5 bg-black/60">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <a href="index.html" class="text-xl font-bold tracking-tighter hover:text-red-500 transition">💀 炸麥工具</a>
+        <div class="flex items-center gap-4">
+            <span id="userDisplay" class="text-cyan-400 text-sm">👤 載入中...</span>
+            <a href="dashboard.html" class="text-red-400 text-sm">儀表板</a>
+            <a href="#" onclick="logoutUser()" class="text-gray-400 hover:text-red-400 transition text-sm">登出</a>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-4xl mx-auto px-5 pt-28 pb-20">
+
+    <div id="dashboardContent">
+        <!-- 由 JS 動態產生 -->
+    </div>
+
+</main>
+
+<script>
+// 檢查是否已登入
+if (!requireAuth()) {
+    // 如果未登入，會自動跳轉到 login.html
+}
+
+// 顯示使用者資訊
+const user = getCurrentUser();
+
+if (user) {
+    document.getElementById('userDisplay').textContent = `👤 ${user.username}`;
+    
+    document.getElementById('dashboardContent').innerHTML = `
+        <div class="glass p-8 text-center">
+            <div class="text-6xl mb-4">💀</div>
+            <h1 class="text-3xl font-bold text-red-500 mb-2">歡迎回來，${user.username}！</h1>
+            <p class="text-gray-400 mb-6">準備好開始毀滅了嗎？</p>
+            
+            <div class="grid md:grid-cols-2 gap-4 text-left">
+                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <div class="text-gray-400 text-sm">📧 Email</div>
+                    <div class="text-white">${user.email || '未設定'}</div>
+                </div>
+                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <div class="text-gray-400 text-sm">👤 帳號</div>
+                    <div class="text-white">${user.username}</div>
+                </div>
+            </div>
+            
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+                <a href="download.html" class="bg-red-600 px-8 py-3 rounded-xl font-bold text-white hover:bg-red-700 transition">
+                    ⬇️ 下載工具
+                </a>
+                <a href="features.html" class="border border-red-500 px-8 py-3 rounded-xl font-bold text-red-400 hover:bg-red-500 hover:text-black transition">
+                    ⚡ 查看功能
+                </a>
+            </div>
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>
