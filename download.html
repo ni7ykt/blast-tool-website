@@ -3,33 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⬇️ 下載炸麥工具</title>
+    <title>📊 儀表板 - 炸麥工具</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="js/auth.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { background: #000; font-family: 'Inter', 'Noto Sans TC', sans-serif; color: #eee; }
-        .download-card {
-            background: rgba(10, 10, 20, 0.7);
-            border: 1px solid rgba(255, 13, 13, 0.15);
-            backdrop-filter: blur(10px);
+        body { background: #0a0a0a; font-family: 'Inter', 'Noto Sans TC', sans-serif; color: #eee; }
+        .glass {
+            background: rgba(10, 10, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 13, 13, 0.2);
             border-radius: 1.5rem;
-            transition: all 0.3s ease;
-        }
-        .download-card:hover {
-            border-color: #ff0d0d;
-            transform: scale(1.02);
-        }
-        .download-btn {
-            background: linear-gradient(135deg, #ff0d0d, #8b0000);
-            transition: all 0.2s;
-        }
-        .download-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 13, 13, 0.8);
-        }
-        .version-tag {
-            background: rgba(255, 13, 13, 0.2);
-            border: 1px solid rgba(255, 13, 13, 0.3);
         }
         .scanline {
             position: fixed;
@@ -47,124 +31,99 @@
             0% { background-position: 0 0; }
             100% { background-position: 0 1000px; }
         }
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .stat-card:hover {
+            border-color: #ff0d0d;
+            transform: translateY(-3px);
+        }
     </style>
 </head>
 <body>
 
 <div class="scanline"></div>
 
-<header class="fixed top-0 left-0 right-0 z-50 px-6 py-4 backdrop-blur-sm border-b border-white/5 bg-black/60">
+<nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4 backdrop-blur-sm border-b border-white/5 bg-black/60">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
         <a href="index.html" class="text-xl font-bold tracking-tighter hover:text-red-500 transition">💀 炸麥工具</a>
-        <a href="index.html" class="border border-white/20 px-4 py-2 text-sm font-medium hover:border-red-500 hover:text-red-500 transition rounded-lg">← 返回</a>
+        <div class="flex items-center gap-4">
+            <span id="userDisplay" class="text-cyan-400 text-sm">👤 載入中...</span>
+            <a href="dashboard.html" class="text-red-400 text-sm">儀表板</a>
+            <a href="#" onclick="logoutUser()" class="text-gray-400 hover:text-red-400 transition text-sm">登出</a>
+        </div>
     </div>
-</header>
+</nav>
 
 <main class="max-w-4xl mx-auto px-5 pt-28 pb-20">
 
-    <div class="text-center mb-12">
-        <div class="text-red-500 font-mono text-sm mb-2">⬇️ 下載中心</div>
-        <h1 class="text-5xl md:text-6xl font-bold glitch" style="color:#ff0d0d;text-shadow:0 0 10px #ff4d4d;" data-text="開始毀滅">開始毀滅</h1>
-        <p class="text-gray-400 mt-4">選擇版本下載，解放你的聲卡</p>
-    </div>
-
-    <!-- 最新版本 -->
-    <div class="download-card p-8 mb-6 border-l-4 border-l-red-500">
-        <div class="flex items-start justify-between flex-wrap gap-4">
-            <div>
-                <div class="flex items-center gap-3 flex-wrap">
-                    <h2 class="text-3xl font-bold">v3.0.0</h2>
-                    <span class="version-tag px-3 py-1 rounded-full text-xs text-red-400 font-mono">最新</span>
-                    <span class="text-gray-500 text-sm">2026-07-19</span>
-                </div>
-                <p class="text-gray-400 mt-2">🔥 極限方波化 + 雙音軌疊加 + 立體回音</p>
-                <div class="mt-4 flex flex-wrap gap-4 text-sm text-gray-500 font-mono">
-                    <span>📦 大小: 45.2 MB</span>
-                    <span>🖥️ Windows 11 / 10 (x64)</span>
-                </div>
-                <div class="mt-4">
-                    <p class="text-sm font-bold text-white">更新內容：</p>
-                    <ul class="text-sm text-gray-400 mt-2 space-y-1">
-                        <li class="flex items-start"><span class="text-red-500 mr-2">•</span>新增極限方波化模式</li>
-                        <li class="flex items-start"><span class="text-red-500 mr-2">•</span>支援 YouTube 雙音軌獨立疊加</li>
-                        <li class="flex items-start"><span class="text-red-500 mr-2">•</span>立體回音左右聲道獨立控制</li>
-                        <li class="flex items-start"><span class="text-red-500 mr-2">•</span>狂暴功能全開</li>
-                        <li class="flex items-start"><span class="text-red-500 mr-2">•</span>支援更多音頻格式</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="text-center">
-                <a href="#" class="download-btn inline-block px-10 py-4 text-xl font-bold text-white rounded-full shadow-xl hover:scale-105 transition-transform">
-                    ⬇️ 下載
-                </a>
-                <p class="text-xs text-gray-500 mt-2">已下載 12,847 次</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 舊版本 -->
-    <div class="grid md:grid-cols-2 gap-4 mt-6">
-        <div class="download-card p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h3 class="text-xl font-bold">v2.5.0</h3>
-                    <p class="text-gray-400 text-sm">穩定版</p>
-                </div>
-                <a href="#" class="border border-red-500 px-6 py-2 text-sm font-medium hover:bg-red-500 hover:text-black transition rounded-full">下載</a>
-            </div>
-            <p class="text-xs text-gray-500 mt-2">📅 2026-06-15</p>
-        </div>
-        <div class="download-card p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h3 class="text-xl font-bold">v2.0.0</h3>
-                    <p class="text-gray-400 text-sm">經典版</p>
-                </div>
-                <a href="#" class="border border-red-500 px-6 py-2 text-sm font-medium hover:bg-red-500 hover:text-black transition rounded-full">下載</a>
-            </div>
-            <p class="text-xs text-gray-500 mt-2">📅 2026-05-20</p>
-        </div>
-    </div>
-
-    <!-- 系統需求 -->
-    <div class="mt-8 p-6 border border-white/10 rounded-xl bg-black/30">
-        <h3 class="text-lg font-bold mb-3">📋 系統需求</h3>
-        <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-400">
-            <div>
-                <p>✅ Windows 11 / 10 (64-bit)</p>
-                <p>✅ 4GB RAM 以上</p>
-                <p>✅ 音效卡 (支援 ASIO 優先)</p>
-            </div>
-            <div>
-                <p>✅ 建議安裝 VB-CABLE Virtual Audio</p>
-                <p>✅ .NET Framework 4.8+</p>
-                <p>✅ 100MB 硬碟空間</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 安裝教學 -->
-    <div class="mt-6 p-6 border border-white/10 rounded-xl bg-black/30">
-        <h3 class="text-lg font-bold mb-3">📖 快速安裝</h3>
-        <ol class="text-sm text-gray-400 space-y-2 list-decimal list-inside">
-            <li>下載最新版本炸麥工具</li>
-            <li>解壓縮到任意資料夾</li>
-            <li>執行 <span class="text-red-400 font-mono">blast.exe</span></li>
-            <li>選擇麥克風和 CABLE Output</li>
-            <li>調整效果參數，按下「開炸」</li>
-        </ol>
-    </div>
-
-    <div class="text-center mt-8">
-        <a href="index.html" class="text-gray-500 hover:text-red-500 transition text-sm">← 返回首頁</a>
+    <div id="dashboardContent">
+        <!-- 由 JS 動態產生 -->
     </div>
 
 </main>
 
-<footer class="text-center py-8 text-gray-500 text-sm border-t border-white/5">
-    💀 不用禁你麥，你會自己關 Discord<br>
-    © 2026 炸麥工具 — 聲卡毀滅者
-</footer>
+<script>
+if (!requireAuth()) {
+    // 如果未登入，會自動跳轉到 login.html
+}
+
+const user = getCurrentUser();
+
+if (user) {
+    document.getElementById('userDisplay').textContent = `👤 ${user.username}`;
+    
+    document.getElementById('dashboardContent').innerHTML = `
+        <div class="glass p-8">
+            <div class="text-center mb-8">
+                <div class="text-6xl mb-4">💀</div>
+                <h1 class="text-3xl font-bold text-red-500 mb-2">歡迎回來，${user.username}！</h1>
+                <p class="text-gray-400">準備好開始毀滅了嗎？</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="stat-card">
+                    <div class="text-3xl mb-2">📧</div>
+                    <div class="text-gray-400 text-sm">Email</div>
+                    <div class="text-white font-medium">${user.email || '未設定'}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="text-3xl mb-2">👤</div>
+                    <div class="text-gray-400 text-sm">帳號</div>
+                    <div class="text-white font-medium">${user.username}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="text-3xl mb-2">📅</div>
+                    <div class="text-gray-400 text-sm">註冊時間</div>
+                    <div class="text-white font-medium">${new Date().toLocaleDateString()}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="text-3xl mb-2">🏆</div>
+                    <div class="text-gray-400 text-sm">狀態</div>
+                    <div class="text-green-400 font-medium">✅ 已驗證</div>
+                </div>
+            </div>
+            
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+                <a href="download.html" class="bg-red-600 px-8 py-3 rounded-xl font-bold text-white hover:bg-red-700 transition">
+                    ⬇️ 下載工具
+                </a>
+                <a href="features.html" class="border border-red-500 px-8 py-3 rounded-xl font-bold text-red-400 hover:bg-red-500 hover:text-black transition">
+                    ⚡ 查看功能
+                </a>
+                <a href="index.html" class="border border-gray-500 px-8 py-3 rounded-xl font-bold text-gray-400 hover:bg-gray-500 hover:text-black transition">
+                    🏠 回到首頁
+                </a>
+            </div>
+        </div>
+    `;
+}
+</script>
 
 </body>
 </html>
