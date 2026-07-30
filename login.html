@@ -71,7 +71,6 @@
         <!-- 訊息顯示 -->
         <div id="message" class="hidden p-3 rounded-lg mb-4 text-sm"></div>
 
-        <!-- 登入後自動跳轉 -->
         <script>
             if (isLoggedIn()) {
                 window.location.href = 'dashboard.html';
@@ -87,6 +86,10 @@
             <div class="mb-6">
                 <label class="block text-gray-300 text-sm mb-2">🔒 密碼</label>
                 <input type="password" id="password" class="input-field" placeholder="請輸入密碼" required>
+            </div>
+
+            <div class="flex justify-between items-center mb-6">
+                <a href="forget-password.html" class="text-red-400 hover:underline text-sm">🔑 忘記密碼？</a>
             </div>
 
             <button type="submit" class="login-btn w-full py-3 rounded-xl font-bold text-white text-lg">
