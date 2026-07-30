@@ -31,13 +31,24 @@
             0% { background-position: 0 0; }
             100% { background-position: 0 1000px; }
         }
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .stat-card:hover {
+            border-color: #ff0d0d;
+            transform: translateY(-3px);
+        }
     </style>
 </head>
 <body>
 
 <div class="scanline"></div>
 
-<!-- 導航 -->
 <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4 backdrop-blur-sm border-b border-white/5 bg-black/60">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
         <a href="index.html" class="text-xl font-bold tracking-tighter hover:text-red-500 transition">💀 炸麥工具</a>
@@ -58,31 +69,43 @@
 </main>
 
 <script>
-// 檢查是否已登入
 if (!requireAuth()) {
     // 如果未登入，會自動跳轉到 login.html
 }
 
-// 顯示使用者資訊
 const user = getCurrentUser();
 
 if (user) {
     document.getElementById('userDisplay').textContent = `👤 ${user.username}`;
     
     document.getElementById('dashboardContent').innerHTML = `
-        <div class="glass p-8 text-center">
-            <div class="text-6xl mb-4">💀</div>
-            <h1 class="text-3xl font-bold text-red-500 mb-2">歡迎回來，${user.username}！</h1>
-            <p class="text-gray-400 mb-6">準備好開始毀滅了嗎？</p>
+        <div class="glass p-8">
+            <div class="text-center mb-8">
+                <div class="text-6xl mb-4">💀</div>
+                <h1 class="text-3xl font-bold text-red-500 mb-2">歡迎回來，${user.username}！</h1>
+                <p class="text-gray-400">準備好開始毀滅了嗎？</p>
+            </div>
             
-            <div class="grid md:grid-cols-2 gap-4 text-left">
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                    <div class="text-gray-400 text-sm">📧 Email</div>
-                    <div class="text-white">${user.email || '未設定'}</div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="stat-card">
+                    <div class="text-3xl mb-2">📧</div>
+                    <div class="text-gray-400 text-sm">Email</div>
+                    <div class="text-white font-medium">${user.email || '未設定'}</div>
                 </div>
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                    <div class="text-gray-400 text-sm">👤 帳號</div>
-                    <div class="text-white">${user.username}</div>
+                <div class="stat-card">
+                    <div class="text-3xl mb-2">👤</div>
+                    <div class="text-gray-400 text-sm">帳號</div>
+                    <div class="text-white font-medium">${user.username}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="text-3xl mb-2">📅</div>
+                    <div class="text-gray-400 text-sm">註冊時間</div>
+                    <div class="text-white font-medium">${new Date().toLocaleDateString()}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="text-3xl mb-2">🏆</div>
+                    <div class="text-gray-400 text-sm">狀態</div>
+                    <div class="text-green-400 font-medium">✅ 已驗證</div>
                 </div>
             </div>
             
@@ -92,6 +115,9 @@ if (user) {
                 </a>
                 <a href="features.html" class="border border-red-500 px-8 py-3 rounded-xl font-bold text-red-400 hover:bg-red-500 hover:text-black transition">
                     ⚡ 查看功能
+                </a>
+                <a href="index.html" class="border border-gray-500 px-8 py-3 rounded-xl font-bold text-gray-400 hover:bg-gray-500 hover:text-black transition">
+                    🏠 回到首頁
                 </a>
             </div>
         </div>
