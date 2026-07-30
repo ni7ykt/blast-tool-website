@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ 功能介紹 - 炸麥工具</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { background: #000; font-family: 'Inter', 'Noto Sans TC', sans-serif; color: #eee; }
+        .feature-card {
+            background: rgba(10, 10, 20, 0.7);
+            border: 1px solid rgba(255, 13, 13, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            border-color: #ff0d0d;
+            transform: translateY(-5px);
+            box-shadow: 0 0 40px rgba(255, 13, 13, 0.15);
+        }
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent 50%, rgba(255, 13, 13, 0.03) 50%);
+            background-size: 100% 6px;
+            pointer-events: none;
+            z-index: 999;
+            animation: scan 12s linear infinite;
+        }
+        @keyframes scan {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 1000px; }
+        }
+        .glitch {
+            position: relative;
+            display: inline-block;
+            color: #ff0d0d;
+            text-shadow: 0 0 10px #ff4d4d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="scanline"></div>
+
+<header class="fixed top-0 left-0 right-0 z-50 px-6 py-4 backdrop-blur-sm border-b border-white/5 bg-black/60">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <a href="index.html" class="text-xl font-bold tracking-tighter hover:text-red-500 transition">💀 炸麥工具</a>
+        <nav class="hidden md:flex gap-6 text-sm font-medium">
+            <a href="index.html" class="hover:text-red-500 transition">首頁</a>
+            <a href="features.html" class="text-red-500 transition">功能</a>
+            <a href="download.html" class="hover:text-red-500 transition">下載</a>
+            <a href="about.html" class="hover:text-red-500 transition">關於</a>
+        </nav>
+        <a href="download.html" class="border border-red-500 px-4 py-2 text-sm font-medium hover:bg-red-500 hover:text-black transition rounded-lg">下載軍火</a>
+    </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-5 pt-28 pb-20">
+
+    <div class="text-center mb-16">
+        <div class="text-red-500 font-mono text-sm mb-2">⚡ 核心功能</div>
+        <h1 class="text-5xl md:text-6xl font-bold glitch" data-text="七層毀滅">七層毀滅</h1>
+        <p class="text-gray-400 mt-4 max-w-2xl mx-auto">每一層都是一次對你優越感的精準打擊</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+
+        <div class="feature-card p-8">
+            <div class="text-5xl mb-4">🎤</div>
+            <h2 class="text-2xl font-bold text-red-400 mb-2">爆麥增益</h2>
+            <p class="text-gray-400 leading-relaxed">0 ~ 100 萬倍即時增益，把你的聲音推到物理極限。超越 16-bit 的裁切邊緣，讓每個音節都充滿毀滅性的力量。</p>
+        </div>
+
+        <div class="feature-card p-8">
+            <div class="text-5xl mb-4">📢</div>
+            <h2 class="text-2xl font-bold text-orange-400 mb-2">白噪音疊加</h2>
+            <p class="text-gray-400 leading-relaxed">即時生成隨機雜訊，強度 0 ~ 5000 可調。讓你的聲音聽起來像從一場數位風暴中逃出來。</p>
+        </div>
+
+        <div class="feature-card p-8">
+            <div class="text-5xl mb-4">🎵</div>
+            <h2 class="text-2xl font-bold text-yellow-400 mb-2">八環奏樂</h2>
+            <p class="text-gray-400 leading-relaxed">第二首 YouTube 音樂獨立疊加，音量獨立控制。讓炸裂的人聲與背景音樂形成毀滅性的對位。</p>
+        </div>
+
+        <div class="feature-card p-8">
+            <div class="text-5xl mb-4">🔊</div>
+            <h2 class="text-2xl font-bold text-blue-400 mb-2">立體回音</h2>
+            <p class="text-gray-400 leading-relaxed">左右聲道獨立延遲（0.05 ~ 1.0 秒），衰減係數 0 ~ 1.0。讓你的聲音在虛擬空間中無限反射。</p>
+        </div>
+
+        <div class="feature-card p-8">
+            <div class="text-5xl mb-4">🔊</div>
+            <h2 class="text-2xl font-bold text-purple-400 mb-2">低重音模式</h2>
+            <p class="text-gray-400 leading-relaxed">次諧波生成 + 低頻強化，讓你的聲音低沉到震碎玻璃。適合搭配炸麥使用。</p>
+        </div>
+
+        <div class="feature-card p-8">
+            <div class="text-5xl mb-4">📂</div>
+            <h2 class="text-2xl font-bold text-green-400 mb-2">本地檔案支援</h2>
+            <p class="text-gray-400 leading-relaxed">支援 MP3 / WAV / MP4 / FLAC / OGG / M4A / AAC。不用網路也能炸。</p>
+        </div>
+
+        <div class="feature-card p-8">
+            <div class="text-5xl mb-4">⚡</div>
+            <h2 class="text-2xl font-bold text-amber-400 mb-2">即時處理</h2>
+            <p class="text-gray-400 leading-relaxed">極低延遲的音頻處理，讓你說話的瞬間就產生毀滅性的效果。即時反饋，即時破壞。</p>
+        </div>
+
+        <div class="feature-card p-8">
+            <div class="text-5xl mb-4">🎧</div>
+            <h2 class="text-2xl font-bold text-teal-400 mb-2">VB-Cable 支援</h2>
+            <p class="text-gray-400 leading-relaxed">完整支援虛擬音效卡，讓聲音可以完美傳送到 Discord、遊戲、或其他應用程式。</p>
+        </div>
+
+    </div>
+
+    <div class="text-center mt-12">
+        <a href="download.html" class="download-btn inline-block px-12 py-4 text-xl font-bold text-white rounded-full shadow-xl hover:scale-105 transition-transform" style="background:linear-gradient(135deg,#ff0d0d,#8b0000);">⬇️ 立即下載</a>
+    </div>
+
+</main>
+
+<footer class="text-center py-8 text-gray-500 text-sm border-t border-white/5">
+    💀 不用禁你麥，你會自己關 Discord<br>
+    © 2026 炸麥工具 — 聲卡毀滅者
+</footer>
+
+</body>
+</html>
